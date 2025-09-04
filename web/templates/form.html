@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <title>COVID Risk Predictor</title>
+  <style>
+    body { font-family: sans-serif; margin: 30px; }
+    fieldset { margin-bottom: 15px; }
+    .result { border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-top: 20px; }
+    .ok { color: green; } .warn { color: orange; } .bad { color: red; }
+  </style>
+</head>
+<body>
+  <h1>🩺 ตัวทำนายความเสี่ยง COVID</h1>
+  <form method="post">
+    <fieldset>
+      <legend>ข้อมูลพื้นฐาน</legend>
+      <p>
+        เพศ:
+        <select name="gender">
+          <option value="0">หญิง</option>
+          <option value="1">ชาย</option>
+        </select>
+      </p>
+      <p>
+        อายุ:
+        <input type="number" name="age" min="0" max="120" value="30">
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <legend>อาการ</legend>
+      <label><input type="checkbox" name="cough" value="1"> ไอ</label>
+      <label><input type="checkbox" name="fever" value="1"> ไข้</label>
+      <label><input type="checkbox" name="sore_throat" value="1"> เจ็บคอ</label>
+      <label><input type="checkbox" name="shortness_of_breath" value="1"> หายใจลำบาก</label>
+      <label><input type="checkbox" name="head_ache" value="1"> ปวดหัว</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>ปัจจัยเสี่ยง</legend>
+      <label><input type="checkbox" name="abroad" value="1"> เดินทางต่างประเทศ</label>
+      <label><input type="checkbox" name="contact_with_covid_positive_patient" value="1"> สัมผัสผู้ติดเชื้อ</label>
+    </fieldset>
+
+    <button type="submit">ทำนาย</button>
+  </form>
+
+  {% if result %}
+    <div class="result">
+      <h3>ผลการทำนาย</h3>
+      <p>ความน่าจะเป็น (ติด): <b>{{ '{:.2f}%'.format(result.probability*100) }}</b></p>
+      <p>ระดับความเสี่ยง:
+        {% if "ต่ำ" in result.risk_level %}
+          <span class="ok">{{ result.risk_level }}</span>
+        {% elif "สูง" in result.risk_level %}
+          <span class="bad">{{ result.risk_level }}</span>
+        {% else %}
+          <span class="warn">{{ result.risk_level }}</span>
+        {% endif %}
+      </p>
+      <p>คำแนะนำ: {{ result.recommendation }}</p>
+    </div>
+  {% endif %}
+</body>
+</html>
