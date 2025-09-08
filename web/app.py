@@ -76,10 +76,18 @@ async def form_submit(
     head_ache: int = Form(0),
     abroad: int = Form(0),
     contact_with_covid_positive_patient: int = Form(0),
+
+    # ====== เพิ่มฟีเจอร์ใหม่ ======
+    chronic_disease: int = Form(0),
+    previous_covid: int = Form(0),
+    chills: int = Form(0),
+    diarrhea: int = Form(0),
+    loss_of_smell_taste: int = Form(0),
+    vaccine_doses: int = Form(0),
 ):
     row = {
         "gender": gender,
-        "age_60_and_above": 1 if age >= 60 else 0,  # <-- คำนวณตรงนี้
+        "age_60_and_above": 1 if age >= 60 else 0,
         "cough": cough,
         "fever": fever,
         "sore_throat": sore_throat,
@@ -87,6 +95,15 @@ async def form_submit(
         "head_ache": head_ache,
         "abroad": abroad,
         "contact_with_covid_positive_patient": contact_with_covid_positive_patient,
+
+        # ====== ฟีเจอร์ใหม่ ======
+        "chronic_disease": chronic_disease,
+        "previous_covid": previous_covid,
+        "chills": chills,
+        "diarrhea": diarrhea,
+        "loss_of_smell_taste": loss_of_smell_taste,
+        "vaccine_doses": vaccine_doses,
     }
     result = predict_one(row)
     return templates.TemplateResponse("form.html", {"request": request, "result": result})
+
