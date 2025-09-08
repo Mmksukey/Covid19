@@ -112,15 +112,24 @@
       <legend>อาการ</legend>
       <label><input type="checkbox" name="cough" value="1"> ไอ</label>
       <label><input type="checkbox" name="fever" value="1"> ไข้</label>
+      <label><input type="checkbox" name="head_ache" value="1"> ปวดหัว</label>
       <label><input type="checkbox" name="sore_throat" value="1"> เจ็บคอ</label>
       <label><input type="checkbox" name="shortness_of_breath" value="1"> หายใจลำบาก</label>
-      <label><input type="checkbox" name="head_ache" value="1"> ปวดหัว</label>
+
+
+      <label><input type="checkbox" name="chills" value="1"> หนาวสั่น (chills)</label>
+      <label><input type="checkbox" name="diarrhea" value="1"> ท้องเสีย (diarrhea)</label>
+      <label><input type="checkbox" name="loss_of_smell_taste" value="1"> สูญเสียกลิ่น/รส</label>
     </fieldset>
 
     <fieldset>
       <legend>ปัจจัยเสี่ยง</legend>
       <label><input type="checkbox" name="abroad" value="1"> เดินทางต่างประเทศ</label>
+      <label><input type="checkbox" name="chronic_disease" value="1"> มีโรคประจำตัว</label>
+      <label><input type="checkbox" name="previous_covid" value="1"> เคยติดโควิดมาก่อน</label>
       <label><input type="checkbox" name="contact_with_covid_positive_patient" value="1"> สัมผัสผู้ติดเชื้อ</label>
+      <label>จำนวนเข็มวัคซีน (vaccine_doses):</label>
+      <input type="number" name="vaccine_doses" min="0" max="6" value="0">
     </fieldset>
 
     <button type="submit">ทำนาย</button>
