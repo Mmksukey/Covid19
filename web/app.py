@@ -1,6 +1,7 @@
 # app.py
 # Run: uvicorn app:app --reload --port 8000
 
+from fastapi.staticfiles import StaticFiles
 import pickle, yaml
 import numpy as np
 import pandas as pd
@@ -34,6 +35,7 @@ except Exception:
         ]
 
 app = FastAPI(title="COVID Risk Predictor")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 BASE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
